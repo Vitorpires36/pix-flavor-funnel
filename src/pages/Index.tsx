@@ -3,18 +3,19 @@ import { Header } from '@/components/Header';
 import { ProductCard } from '@/components/ProductCard';
 import { Chatbot } from '@/components/Chatbot';
 import { products } from '@/lib/products';
-import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const Index = () => {
-  const [filter, setFilter] = useState<'all' | 'pod' | 'juice'>('all');
-
-  const filteredProducts = products.filter(
-    product => filter === 'all' || product.category === filter
-  );
+  const [selectedBrand, setSelectedBrand] = useState<string>('all');
 
   const podProducts = products.filter(p => p.category === 'pod');
-  const juiceProducts = products.filter(p => p.category === 'juice');
+  const tabacariaProducts = products.filter(p => p.category === 'tabacaria');
+  
+  const brands = ['Ignite', 'Elf Bar', 'Lost Mary', 'Oxbar', 'Sex Addict', 'Adjust', 'Funkylands', 'Bem Bolado', 'Nikbar'];
+  
+  const filteredPods = selectedBrand === 'all' 
+    ? podProducts 
+    : podProducts.filter(p => p.brand === selectedBrand);
 
   return (
     <div className="min-h-screen bg-background">
@@ -27,52 +28,71 @@ const Index = () => {
         </p>
       </div>
 
-      {/* Conteúdo Principal */}
+      {/* Marcas Disponíveis */}
+      <div className="bg-card border-b border-border py-4">
+        <div className="container mx-auto px-4">
+          <p className="text-center text-sm text-muted-foreground">
+            IGNITE - ELFBAR - OXBAR - SEX ADDICT - ADJUST<br className="sm:hidden" />
+            <span className="hidden sm:inline"> • </span>
+            LOSTMARY - FUNKYLANDS - BEM BOLADO - NIKBAR
+          </p>
+        </div>
+      </div>
+
+      {/* Conteúdo Principal - Pods */}
       <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="all" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8 bg-card">
-            <TabsTrigger value="all" onClick={() => setFilter('all')}>
-              Todos ({products.length})
+        <h2 className="text-2xl font-bold text-primary mb-6">Vapes & Pods</h2>
+        
+        <Tabs defaultValue="all" className="w-full mb-8">
+          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10 mb-6 bg-card">
+            <TabsTrigger 
+              value="all" 
+              onClick={() => setSelectedBrand('all')}
+              className="text-xs sm:text-sm"
+            >
+              Todos
             </TabsTrigger>
-            <TabsTrigger value="pods" onClick={() => setFilter('pod')}>
-              Pods ({podProducts.length})
-            </TabsTrigger>
-            <TabsTrigger value="juices" onClick={() => setFilter('juice')}>
-              Juices ({juiceProducts.length})
-            </TabsTrigger>
+            {brands.map((brand) => (
+              <TabsTrigger 
+                key={brand}
+                value={brand} 
+                onClick={() => setSelectedBrand(brand)}
+                className="text-xs sm:text-sm"
+              >
+                {brand}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
-          <TabsContent value="all" className="mt-0">
+          <TabsContent value={selectedBrand} className="mt-0">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="pods" className="mt-0">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {podProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="juices" className="mt-0">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {juiceProducts.map((product) => (
+              {filteredPods.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </TabsContent>
         </Tabs>
 
-        {filteredProducts.length === 0 && (
+        {filteredPods.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
-            <p className="text-lg">Nenhum produto encontrado</p>
+            <p className="text-lg">Nenhum produto encontrado para esta marca</p>
           </div>
         )}
       </main>
+
+      {/* Seção Tabacaria */}
+      <section className="bg-gradient-to-b from-background to-card py-12 border-t-2 border-accent">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-accent mb-6 text-center">
+            🔥 Tabacaria
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {tabacariaProducts.map((product) => (
+              <ProductCard key={product.id} product={product} isTabacaria />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-black text-white text-center py-6 mt-12 border-t-2 border-primary">

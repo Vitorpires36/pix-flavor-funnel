@@ -4,7 +4,8 @@ export interface Product {
   description: string;
   price: number;
   image: string;
-  category: 'pod' | 'juice';
+  category: 'pod' | 'tabacaria';
+  brand?: string;
   flavors?: string[];
   puffs?: string;
   inStock: boolean;

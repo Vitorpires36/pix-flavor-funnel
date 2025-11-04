@@ -15,9 +15,10 @@ import { ShoppingCart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
+  isTabacaria?: boolean;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, isTabacaria = false }: ProductCardProps) => {
   const { addToCart } = useCart();
   const [selectedFlavor, setSelectedFlavor] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
         <div className="p-3">
-          <h3 className="text-primary font-bold text-sm mb-1 truncate">
+          <h3 className={`font-bold text-sm mb-1 truncate ${isTabacaria ? 'text-accent' : 'text-primary'}`}>
             {product.name}
           </h3>
           <p className="text-muted-foreground text-xs mb-2 line-clamp-2">
@@ -73,7 +74,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             <DialogTrigger asChild>
               <Button
                 className="w-full"
-                variant={product.category === 'pod' ? 'default' : 'secondary'}
+                variant={isTabacaria ? 'accent' : 'default'}
                 size="sm"
               >
                 <ShoppingCart className="mr-2 h-4 w-4" />
@@ -102,7 +103,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <Button
             onClick={handleAddToCart}
             className="w-full"
-            variant={product.category === 'pod' ? 'default' : 'secondary'}
+            variant={isTabacaria ? 'accent' : 'default'}
             size="sm"
           >
             <ShoppingCart className="mr-2 h-4 w-4" />

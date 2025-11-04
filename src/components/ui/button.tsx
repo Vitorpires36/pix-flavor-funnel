@@ -13,6 +13,7 @@ const buttonVariants = cva(
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-card hover:bg-muted",
         secondary: "gradient-secondary text-secondary-foreground hover:opacity-90",
+        accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm",
         ghost: "hover:bg-muted hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         whatsapp: "bg-[hsl(var(--whatsapp))] text-white hover:bg-[hsl(var(--whatsapp))]/90",
