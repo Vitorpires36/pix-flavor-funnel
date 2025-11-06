@@ -28,7 +28,7 @@ export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
   const [step, setStep] = useState<'form' | 'pix'>('form');
   const [calculandoFrete, setCalculandoFrete] = useState(false);
 
-  const pixKey = 'podepod@pix.com.br';
+  const pixKey = '5511948453681';
 
   useEffect(() => {
     if (open) {
@@ -92,7 +92,7 @@ export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
       `💰 *Total:* R$ ${totalComFrete.toFixed(2)}\n\n` +
       `✅ Pagamento via PIX confirmado!`;
 
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5511981878093?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 
     clearCart();
