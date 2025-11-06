@@ -4,6 +4,8 @@ interface FreteResponse {
   distanciaKm: number;
   duracaoMin: number;
   preco: number;
+  valorPorKm: number;
+  margemMinima: number;
 }
 
 interface FreteState {
@@ -12,7 +14,7 @@ interface FreteState {
   error: string | null;
 }
 
-const STORE_ADDRESS = 'Rua Barao de Duprat, 353, Sao Paulo, Brazil';
+const STORE_ADDRESS = 'Rua Barao de Duprat, 535, Sao Paulo';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
