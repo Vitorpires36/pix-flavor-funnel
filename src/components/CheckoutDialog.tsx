@@ -1,6 +1,7 @@
 // src/components/CheckoutDialog.tsx
+// SUBSTITUA TODO O CONTEÚDO DO ARQUIVO POR ESTE CÓDIGO
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import {
   Dialog,
@@ -11,10 +12,70 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Copy, Check, MessageCircle, AlertCircle } from 'lucide-react';
+import { Copy, Check, MessageCircle, AlertCircle, MapPin, Clock, Search } from 'lucide-react';
 import { toast } from 'sonner';
-import { BairroSelector } from '@/components/BairroSelector';
-import type { BairroSP } from '@/lib/bairros';
+import { cn } from '@/lib/utils';
+
+// ==================== DADOS DOS BAIRROS ====================
+interface BairroSP {
+  nome: string;
+  distanciaKm: number;
+  zona: string;
+  tempoEntregaMin: number;
+  valorBase: number;
+}
+
+const BAIRROS_SP: BairroSP[] = [
+  // ZONA CENTRO
+  { nome: "República", distanciaKm: 1.8, zona: "Centro", tempoEntregaMin: 8, valorBase: 13.24 },
+  { nome: "Sé", distanciaKm: 2.1, zona: "Centro", tempoEntregaMin: 10, valorBase: 13.78 },
+  { nome: "Santa Ifigênia", distanciaKm: 1.5, zona: "Centro", tempoEntregaMin: 7, valorBase: 12.70 },
+  { nome: "Luz", distanciaKm: 2.3, zona: "Centro", tempoEntregaMin: 11, valorBase: 14.14 },
+  { nome: "Bom Retiro", distanciaKm: 2.8, zona: "Centro", tempoEntregaMin: 13, valorBase: 15.04 },
+  
+  // ZONA OESTE
+  { nome: "Vila Madalena", distanciaKm: 4.2, zona: "Oeste", tempoEntregaMin: 15, valorBase: 17.56 },
+  { nome: "Pinheiros", distanciaKm: 4.8, zona: "Oeste", tempoEntregaMin: 18, valorBase: 18.64 },
+  { nome: "Jardins", distanciaKm: 3.5, zona: "Oeste", tempoEntregaMin: 12, valorBase: 16.30 },
+  { nome: "Itaim Bibi", distanciaKm: 5.2, zona: "Oeste", tempoEntregaMin: 20, valorBase: 19.36 },
+  { nome: "Vila Olímpia", distanciaKm: 5.5, zona: "Oeste", tempoEntregaMin: 22, valorBase: 19.90 },
+  { nome: "Brooklin", distanciaKm: 6.8, zona: "Oeste", tempoEntregaMin: 25, valorBase: 22.24 },
+  
+  // ZONA SUL
+  { nome: "Vila Mariana", distanciaKm: 6.2, zona: "Sul", tempoEntregaMin: 23, valorBase: 21.16 },
+  { nome: "Ipiranga", distanciaKm: 8.1, zona: "Sul", tempoEntregaMin: 30, valorBase: 24.58 },
+  { nome: "Santo Amaro", distanciaKm: 9.5, zona: "Sul", tempoEntregaMin: 35, valorBase: 27.10 },
+  { nome: "Saúde", distanciaKm: 7.3, zona: "Sul", tempoEntregaMin: 27, valorBase: 23.14 },
+  { nome: "Campo Belo", distanciaKm: 7.8, zona: "Sul", tempoEntregaMin: 29, valorBase: 24.04 },
+  { nome: "Jabaquara", distanciaKm: 10.2, zona: "Sul", tempoEntregaMin: 38, valorBase: 28.36 },
+  
+  // ZONA NORTE
+  { nome: "Santana", distanciaKm: 6.3, zona: "Norte", tempoEntregaMin: 24, valorBase: 21.34 },
+  { nome: "Tucuruvi", distanciaKm: 7.1, zona: "Norte", tempoEntregaMin: 26, valorBase: 22.78 },
+  { nome: "Casa Verde", distanciaKm: 8.5, zona: "Norte", tempoEntregaMin: 32, valorBase: 25.30 },
+  { nome: "Vila Guilherme", distanciaKm: 7.9, zona: "Norte", tempoEntregaMin: 30, valorBase: 24.22 },
+  { nome: "Vila Maria", distanciaKm: 9.2, zona: "Norte", tempoEntregaMin: 34, valorBase: 26.56 },
+  
+  // ZONA LESTE
+  { nome: "Tatuapé", distanciaKm: 8.7, zona: "Leste", tempoEntregaMin: 33, valorBase: 25.66 },
+  { nome: "Vila Prudente", distanciaKm: 9.2, zona: "Leste", tempoEntregaMin: 35, valorBase: 26.56 },
+  { nome: "Penha", distanciaKm: 10.8, zona: "Leste", tempoEntregaMin: 40, valorBase: 29.44 },
+  { nome: "Carrão", distanciaKm: 9.8, zona: "Leste", tempoEntregaMin: 37, valorBase: 27.64 },
+  { nome: "Vila Formosa", distanciaKm: 11.2, zona: "Leste", tempoEntregaMin: 42, valorBase: 30.16 },
+];
+
+const ZONAS = ['Todas', 'Centro', 'Oeste', 'Sul', 'Norte', 'Leste'];
+
+const getZonaColor = (zona: string): string => {
+  const colors: Record<string, string> = {
+    'Centro': 'bg-purple-500',
+    'Oeste': 'bg-blue-500',
+    'Sul': 'bg-green-500',
+    'Norte': 'bg-red-500',
+    'Leste': 'bg-yellow-500'
+  };
+  return colors[zona] || 'bg-gray-500';
+};
 
 interface CheckoutDialogProps {
   open: boolean;
@@ -23,25 +84,42 @@ interface CheckoutDialogProps {
 
 export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
   const { cart, total, clearCart } = useCart();
+  
+  // Estados
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [endereco, setEndereco] = useState('');
   const [selectedBairro, setSelectedBairro] = useState<BairroSP | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedZona, setSelectedZona] = useState('Todas');
   const [copied, setCopied] = useState(false);
   const [step, setStep] = useState<'form' | 'pix'>('form');
 
   const pixKey = '5511948453681';
 
+  // Reset ao abrir
   useEffect(() => {
     if (open) {
       setName('');
       setPhone('');
       setEndereco('');
       setSelectedBairro(null);
+      setSearchTerm('');
+      setSelectedZona('Todas');
       setStep('form');
     }
   }, [open]);
 
+  // Filtrar bairros
+  const bairrosFiltrados = useMemo(() => {
+    return BAIRROS_SP.filter(bairro => {
+      const matchSearch = bairro.nome.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchZona = selectedZona === 'Todas' || bairro.zona === selectedZona;
+      return matchSearch && matchZona;
+    }).sort((a, b) => a.distanciaKm - b.distanciaKm);
+  }, [searchTerm, selectedZona]);
+
+  // Cálculos
   const valorFrete = selectedBairro ? selectedBairro.valorBase : 0;
   const freteGratis = total >= 100;
   const totalComFrete = freteGratis ? total : total + valorFrete;
@@ -143,15 +221,117 @@ export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
               />
             </div>
 
-            {/* Seletor de Bairro */}
-            <div className="border-t border-border pt-4">
-              <BairroSelector 
-                onSelect={setSelectedBairro}
-                selectedBairro={selectedBairro}
-              />
+            {/* SELETOR DE BAIRRO */}
+            <div className="border-t border-border pt-4 space-y-4">
+              <Label className="text-foreground text-lg font-semibold">Selecione seu Bairro</Label>
+              
+              {/* Busca */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Buscar bairro..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-background border-border text-foreground"
+                />
+              </div>
+
+              {/* Filtro por Zona */}
+              <div className="flex flex-wrap gap-2">
+                {ZONAS.map(zona => (
+                  <Button
+                    key={zona}
+                    onClick={() => setSelectedZona(zona)}
+                    variant={selectedZona === zona ? 'default' : 'outline'}
+                    size="sm"
+                  >
+                    {zona}
+                  </Button>
+                ))}
+              </div>
+
+              {/* Lista de Bairros */}
+              <div className="border border-border rounded-lg max-h-[300px] overflow-y-auto bg-card">
+                {bairrosFiltrados.length === 0 ? (
+                  <div className="p-8 text-center text-muted-foreground">
+                    <MapPin className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                    <p>Nenhum bairro encontrado</p>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-border">
+                    {bairrosFiltrados.map((bairro) => (
+                      <button
+                        key={bairro.nome}
+                        onClick={() => setSelectedBairro(bairro)}
+                        className={cn(
+                          "w-full p-3 text-left transition-all hover:bg-muted",
+                          selectedBairro?.nome === bairro.nome && "bg-primary/10 border-l-4 border-primary"
+                        )}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="text-sm font-semibold text-foreground">
+                                {bairro.nome}
+                              </h3>
+                              <span className={cn(
+                                "px-2 py-0.5 text-xs rounded-full text-white",
+                                getZonaColor(bairro.zona)
+                              )}>
+                                {bairro.zona}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                              <span className="flex items-center gap-1">
+                                <MapPin className="h-3 w-3" />
+                                {bairro.distanciaKm.toFixed(1)} km
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Clock className="h-3 w-3" />
+                                ~{bairro.tempoEntregaMin} min
+                              </span>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-base font-bold text-primary">
+                              R$ {bairro.valorBase.toFixed(2)}
+                            </div>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Bairro Selecionado */}
+              {selectedBairro && (
+                <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg">
+                  <p className="text-sm font-semibold text-blue-400 mb-2">
+                    ✓ Bairro Selecionado
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-base font-bold text-foreground">
+                        {selectedBairro.nome}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {selectedBairro.distanciaKm.toFixed(1)} km • ~{selectedBairro.tempoEntregaMin} min
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs text-muted-foreground">Frete</p>
+                      <p className="text-lg font-bold text-primary">
+                        R$ {selectedBairro.valorBase.toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Aviso Frete Grátis */}
+            {/* Avisos Frete */}
             {!freteGratis && total < 100 && selectedBairro && (
               <div className="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg">
                 <div className="flex gap-2">
