@@ -69,7 +69,7 @@ export const products: Product[] = [
     name: "ELFBAR EW KIT",
     description: "9.000 PUFFS - Design Premium",
     price: 79.90,
-    image: "/ELFBAR9K.png",
+    image: "/ELFBAR8K.png",
     category: "pod",
     brand: "Elf Bar",
     puffs: "9000",
