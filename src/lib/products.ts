@@ -65,38 +65,38 @@ export const products: Product[] = [
 },
   // ELF BAR
   {
-    id: "elfbar-bc5000",
-    name: "ELFBAR BC5000",
-    description: "5.000 PUFFS - Design Premium",
-    price: 59.90,
-    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
-    category: "pod",
-    brand: "Elf Bar",
-    puffs: "5000",
-    inStock: true,
-    flavors: ["Morango Kiwi", "Mirtilo", "Manga", "Maracujá", "Framboesa"]
-  },
-  {
-    id: "elfbar-te6000",
-    name: "ELFBAR TE6000",
-    description: "6.000 PUFFS",
-    price: 64.90,
-    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
-    category: "pod",
-    brand: "Elf Bar",
-    puffs: "6000",
-    inStock: true,
-    flavors: ["Blue Razz Ice", "Strawberry Ice", "Mango Ice"]
-  },
-  {
-    id: "elfbar-pi9000",
-    name: "ELFBAR PI9000",
-    description: "9.000 PUFFS - Tela Digital",
+    id: "elfbar-ew9000",
+    name: "ELFBAR EW KIT",
+    description: "9.000 PUFFS - Design Premium",
     price: 79.90,
     image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
     category: "pod",
     brand: "Elf Bar",
     puffs: "9000",
+    inStock: true,
+    flavors: ["Morango Kiwi", "Mirtilo", "Manga", "Maracujá", "Framboesa"]
+  },
+  {
+    id: "elfbar-tc10000",
+    name: "ELFBAR TOUCH",
+    description: "10.000 PUFFS",
+    price: 69.90,
+    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
+    category: "pod",
+    brand: "Elf Bar",
+    puffs: "10000",
+    inStock: true,
+    flavors: ["Blue Razz Ice", "Strawberry Ice", "Mango Ice"]
+  },
+  {
+    id: "elfbar-ew10000",
+    name: "ELFBAR EW KIT",
+    description: "10.000 PUFFS",
+    price: 79.90,
+    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
+    category: "pod",
+    brand: "Elf Bar",
+    puffs: "10000",
     inStock: true,
     flavors: ["Watermelon Ice", "Peach Ice", "Grape Ice"]
   },
@@ -113,17 +113,43 @@ export const products: Product[] = [
     flavors: ["Fresh Mint", "Tropical Fruit", "Berry Mix"]
   },
   {
-    id: "elfbar-bc10000",
-    name: "ELFBAR BC10000",
-    description: "10.000 PUFFS - Display LED",
-    price: 69.90,
+    id: "elfbar-230000",
+    name: "ELFBAR 23K",
+    description: "23.000 PUFFS - Display LED",
+    price: 89.90,
     image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
     category: "pod",
     brand: "Elf Bar",
-    puffs: "10000",
+    puffs: "23000",
     inStock: true,
     flavors: ["Lemon Mint", "Strawberry Mango", "Blueberry Ice"]
   },
+
+  {
+    id: "elfbar-300000",
+    name: "ELFBAR 30K",
+    description: "30.000 PUFFS - Display LED",
+    price: 104.90,
+    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
+    category: "pod",
+    brand: "Elf Bar",
+    puffs: "30000",
+    inStock: true,
+    flavors: ["Lemon Mint", "Strawberry Mango", "Blueberry Ice"]
+  },
+{
+    id: "elfbar-400000",
+    name: "ELFBAR 40K",
+    description: "40.000 PUFFS - Display LED",
+    price: 109.90,
+    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
+    category: "pod",
+    brand: "Elf Bar",
+    puffs: "40000",
+    inStock: true,
+    flavors: ["Lemon Mint", "Strawberry Mango", "Blueberry Ice"]
+  },
+
 
   // LOST MARY
   {
