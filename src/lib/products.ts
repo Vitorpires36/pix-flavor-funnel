@@ -69,13 +69,26 @@ export const products: Product[] = [
     name: "ELFBAR EW KIT",
     description: "9.000 PUFFS - Design Premium",
     price: 79.90,
-    image: "/ELFBAR8K.png",
+    image: "/ELFEW9K.png",
     category: "pod",
     brand: "Elf Bar",
     puffs: "9000",
     inStock: true,
     flavors: ["Morango Kiwi", "Mirtilo", "Manga", "Maracujá", "Framboesa"]
   },
+  {
+    id: "elfbar-ew9000",
+    name: "ELFBAR 10K",
+    description: "10.000 PUFFS - Design Premium",
+    price: 79.90,
+    image: "/ELFBAR8K.png",
+    category: "pod",
+    brand: "Elf Bar",
+    puffs: "10000",
+    inStock: true,
+    flavors: ["Morango Kiwi", "Mirtilo", "Manga", "Maracujá", "Framboesa"]
+  },
+  
   {
     id: "elfbar-tc10000",
     name: "ELFBAR TOUCH",
