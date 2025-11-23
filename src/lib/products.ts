@@ -237,7 +237,7 @@ export const products: Product[] = [
     name: "SEX ADDICT 28K",
     description: "28.000 PUFFS - Tela LED",
     price: 99.90,
-    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
+    image: "/SEXADDICT28K.png",
     category: "pod",
     brand: "Sex Addict",
     puffs: "28000",
