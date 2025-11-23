@@ -195,7 +195,7 @@ export const products: Product[] = [
  {
     id: "oxbar-95k",
     name: "OXBAR 9.5K",
-    description: 9.500 PUFFS",
+    description: "9.500 PUFFS",
     price: 74.90,
     image: "/OXBAR95K.png",
     category: "pod",
@@ -208,7 +208,7 @@ export const products: Product[] = [
   {
     id: "oxbar-10k",
     name: "OXBAR 10K",
-    description: 10.000 PUFFS",
+    description: "10.000 PUFFS",
     price: 79.90,
     image: "/OXBAR10K.png",
     category: "pod",
