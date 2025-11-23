@@ -223,7 +223,7 @@ export const products: Product[] = [
     name: "OXBAR 30K",
     description: "30.000 PUFFS",
     price: 104.90,
-    image: "/OXBAR30K.png",
+    image: "/OXBAR30k.png",
     category: "pod",
     brand: "Oxbar",
     puffs: "30000",
