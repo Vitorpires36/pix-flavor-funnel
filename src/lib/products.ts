@@ -192,7 +192,7 @@ export const products: Product[] = [
   },
 
   // OXBAR
-/*  {
+ {
     id: "oxbar-9.5k",
     name: "OXBAR 9.5K",
     description: 9.500 PUFFS",
@@ -205,7 +205,7 @@ export const products: Product[] = [
     flavors: ["Mint Ice", "Strawberry", "Grape"]
   },
 
-  {
+ /* {
     id: "oxbar-10k",
     name: "OXBAR 10K",
     description: 10.000 PUFFS",
