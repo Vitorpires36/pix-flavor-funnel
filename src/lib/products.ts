@@ -247,10 +247,10 @@ export const products: Product[] = [
 
   // ADJUST
   {
-    id: "adjust-kit",
-    name: "ADJUST KIT",
-    description: "Kit Completo Recarregável",
-    price: 149.90,
+    id: "adjust-40k",
+    name: "ADJUST 40K",
+    description: "40.000 PUFFS",
+    price: 99.90,
     image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
     category: "pod",
     brand: "Adjust",
@@ -260,10 +260,10 @@ export const products: Product[] = [
 
   // FUNKYLANDS
   {
-    id: "funkylands-ti7000",
-    name: "FUNKYLANDS TI7000",
-    description: "7.000 PUFFS - Display Digital",
-    price: 69.90,
+    id: "funkylands-7000",
+    name: "FUNKYLANDS 7K",
+    description: "7.000 PUFFS",
+    price: 54.90,
     image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
     category: "pod",
     brand: "Funkylands",
@@ -271,6 +271,21 @@ export const products: Product[] = [
     inStock: true,
     flavors: ["Rainbow Candy", "Cool Mint", "Strawberry Ice"]
   },
+   // NIKBAR
+  {
+    id: "nikbar-40k",
+    name: "NIKBAR 40K",
+    description: "40.000 PUFFS",
+    price: 104.90,
+    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
+    category: "pod",
+    brand: "Nikbar",
+    puffs: "40000",
+    inStock: true,
+    flavors: ["Mint", "Strawberry", "Grape"]
+  },
+
+ 
 
   // BEM BOLADO
   {
@@ -284,20 +299,6 @@ export const products: Product[] = [
     puffs: "6000",
     inStock: true,
     flavors: ["Morango", "Uva", "Melancia"]
-  },
-
-  // NIKBAR
-  {
-    id: "nikbar-5k",
-    name: "NIKBAR 5K",
-    description: "5.000 PUFFS",
-    price: 54.90,
-    image: "https://images.unsplash.com/photo-1606941525941-8b15e6a5c4f0?w=400&h=400&fit=crop",
-    category: "pod",
-    brand: "Nikbar",
-    puffs: "5000",
-    inStock: true,
-    flavors: ["Mint", "Strawberry", "Grape"]
   },
 
   // TABACARIA
