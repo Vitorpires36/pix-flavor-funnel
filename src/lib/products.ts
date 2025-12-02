@@ -285,5 +285,5 @@ export const products: Product[] = [
     inStock: true,
     flavors: ["Mint", "Strawberry", "Grape"]
   },
-  ]};
+  ]
  
