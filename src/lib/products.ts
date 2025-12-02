@@ -130,7 +130,7 @@ export const products: Product[] = [
     "Strawberry Ice",
     "Watermelon Ice"
   ]
-}
+},
 
  {
   id: "elfbar-300000",
@@ -162,7 +162,7 @@ export const products: Product[] = [
     "Strawmelon Peach",
     "Watermelon Ice"
   ]
-}
+},
 {
   id: "elfbar-400000",
   name: "ELFBAR 40K ICE KING",
@@ -190,7 +190,7 @@ export const products: Product[] = [
     "Tiger’s Blood",
     "Watermelon Ice"
   ]
-}
+},
 {
     id: "elfbar-bateria",
     name: "ELFBAR BATERIA",
