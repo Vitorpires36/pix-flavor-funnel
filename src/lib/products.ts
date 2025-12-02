@@ -102,43 +102,95 @@ export const products: Product[] = [
     inStock: true,
     flavors: ["Fresh Mint", "Tropical Fruit", "Berry Mix"]
   },
-  {
-    id: "elfbar-230000",
-    name: "ELFBAR 23K",
-    description: "23.000 PUFFS - Display LED",
-    price: 89.90,
-    image: "/ELFBAR23K.png",
-    category: "pod",
-    brand: "Elf Bar",
-    puffs: "23000",
-    inStock: true,
-    flavors: ["Lemon Mint", "Strawberry Mango", "Blueberry Ice"]
-  },
-
-  {
-    id: "elfbar-300000",
-    name: "ELFBAR 30K",
-    description: "30.000 PUFFS - Display LED",
-    price: 104.90,
-    image: "/ELFBAR30K.png",
-    category: "pod",
-    brand: "Elf Bar",
-    puffs: "30000",
-    inStock: true,
-    flavors: ["Lemon Mint", "Strawberry Mango", "Blueberry Ice"]
-  },
 {
-    id: "elfbar-400000",
-    name: "ELFBAR 40K",
-    description: "40.000 PUFFS - Display LED",
-    price: 109.90,
-    image: "/ELFBAR40K.png",
-    category: "pod",
-    brand: "Elf Bar",
-    puffs: "40000",
-    inStock: true,
-    flavors: ["Lemon Mint", "Strawberry Mango", "Blueberry Ice"]
-  },
+  id: "elfbar-230000",
+  name: "ELFBAR 23K",
+  description: "23.000 PUFFS - Display LED",
+  price: 89.90,
+  image: "/ELFBAR23K.png",
+  category: "pod",
+  brand: "Elf Bar",
+  puffs: "23000",
+  inStock: true,
+  flavors: [
+    "Baja Splash",
+    "Blue Razz Ice",
+    "Blueberry Pear",
+    "Grape Ice",
+    "Green Apple Ice",
+    "Ice Mint",
+    "Kiwi Dragon Fruit",
+    "Lime Grapefruit Ice",
+    "Miami Mint",
+    "Peach Mango Watermelon",
+    "Pineapple Plums Lime Mint",
+    "Sakura Grape",
+    "Spring Mint",
+    "Strawberry Banana",
+    "Strawberry Ice",
+    "Watermelon Ice"
+  ]
+}
+
+ {
+  id: "elfbar-300000",
+  name: "ELFBAR 30K",
+  description: "30.000 PUFFS - Display LED",
+  price: 104.90,
+  image: "/ELFBAR30K.png",
+  category: "pod",
+  brand: "Elf Bar",
+  puffs: "30000",
+  inStock: true,
+  flavors: [
+    "Acai Banana Ice",
+    "Banana Coconut Ice",
+    "Blueberry Sour Raspberry",
+    "Bubbaloo Grape",
+    "Bubbaloo Tutti Frutti",
+    "Cherry Strazz",
+    "Dragon Strawnana",
+    "Elf Love",
+    "Green Apple Ice",
+    "Guava Passion FR Kiwi",
+    "Menthol",
+    "Miami Mint",
+    "Sour Lush Gami",
+    "Spearmint",
+    "Strawberry Ice",
+    "Strawberry Watermelon Ice",
+    "Strawmelon Peach",
+    "Watermelon Ice"
+  ]
+}
+{
+  id: "elfbar-400000",
+  name: "ELFBAR 40K ICE KING",
+  description: "40.000 PUFFS - Display LED",
+  price: 109.90,
+  image: "/ELFBAR40K.png",
+  category: "pod",
+  brand: "Elf Bar",
+  puffs: "40000",
+  inStock: true,
+  flavors: [
+    "Baja Splash",
+    "Blue Razz Ice",
+    "Cherry Fuse",
+    "Cherry Strazz",
+    "Dragon Strawnana",
+    "Mango Magic",
+    "Miami Mint",
+    "Peach+",
+    "Scary Berry",
+    "Sour Apple Ice",
+    "Sour Lush Gummy",
+    "Sour Straw Dragon",
+    "Summer Splash",
+    "Tiger’s Blood",
+    "Watermelon Ice"
+  ]
+}
 {
     id: "elfbar-bateria",
     name: "ELFBAR BATERIA",
@@ -166,30 +218,63 @@ export const products: Product[] = [
     inStock: true,
     flavors: ["Morango Melancia", "Uva Ice", "Limonada", "Blueberry", "Pêssego"]
   },
+ {
+  id: "lostmary-25000",
+  name: "LOST MARY 25K",
+  description: "25.000 PUFFS",
+  price: 84.90,
+  image: "/LOSTMARY25K.png",
+  category: "pod",
+  brand: "Lost Mary",
+  puffs: "25000",
+  inStock: true,
+  flavors: [
+    "Baja Splash",
+    "Black Cherry Peach",
+    "Blue Razz Ice",
+    "Cranberry Apple",
+    "Miami Mint",
+    "Watermelon Ice",
+    "Tripple Berry",
+    "Strawberry Orange Pineapple",
+    "Sour Apple Grape Kiwi",
+    "Orange Mango Guava",
+    "Peach+",
+    "Grapefruit Kiwi Strawberry",
+    "Sour Blackberry Blueberry",
+    "Rainbow Sherbet",
+    "Sour Apple Ice"
+  ]
+}
   {
-    id: "lostmary-25000",
-    name: "LOST MARY 25K",
-    description: "25.000 PUFFS",
-    price: 84.90,
-    image: "/LOSTMARY25K.png",
-    category: "pod",
-    brand: "Lost Mary",
-    puffs: "25000",
-    inStock: true,
-    flavors: ["Kiwi Passion", "Cherry Ice", "Pineapple Ice"]
-  },
-  {
-    id: "lostmary-30000",
-    name: "LOST MARY 30K",
-    description: "30.000 PUFFS",
-    price: 79.90,
-    image: "/LOSTMARY30K.png",
-    category: "pod",
-    brand: "Lost Mary",
-    puffs: "30000",
-    inStock: true,
-    flavors: ["Double Apple", "Mango Peach", "Watermelon Lemon"]
-  },
+  id: "lostmary-30000",
+  name: "LOST MARY 30K",
+  description: "30.000 PUFFS",
+  price: 79.90,
+  image: "/LOSTMARY30K.png",
+  category: "pod",
+  brand: "Lost Mary",
+  puffs: "30000",
+  inStock: true,
+  flavors: [
+    "Apple Grape",
+    "Aloe Grape Sour Apple",
+    "Banana Cherry Ice",
+    "Blue Razz Ice",
+    "Blueberry Watermelon",
+    "Cherry Lemon",
+    "Grapefruit Lemon Lime",
+    "Grapefruit Green Tea",
+    "Mango Strawberry Ice",
+    "Miami Chill",
+    "Mix Mint",
+    "Orange Strawberry",
+    "Raspberry Pineapple",
+    "Red Raspberry Strawberry",
+    "Watermelon B Pop",
+    "Watermelon Ice"
+  ]
+}
 
   // OXBAR
  {
