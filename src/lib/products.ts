@@ -316,7 +316,7 @@ export const products: Product[] = [
     brand: "Sex Addict",
     puffs: "28000",
     inStock: true,
-    flavors: ["Watermelon", "Peach Ice", "Mint"]
+    flavors: ["Banana Ice", "BlueBerry Ice", "Mirtilo Ice", "Grape Acai", "Grape Ice", "Grape Kiwi Ice", "Grape Watermelon Ice", "Green Apple Ice", "Ice Mint", "Kiwi Passion Fruit", "Kiwi Watermelon Ice", "Strawberry Banana", "Strawberry Grape Ice", "Strawberry Kiwi Ice", "Strawberry Watermelon","Watermelon Ice"]
   },
 
   // ADJUST
