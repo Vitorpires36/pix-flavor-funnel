@@ -3,7 +3,7 @@
 export interface BairroSP {
   nome: string;
   distanciaKm: number;
-  zona: string;
+  zona: 'Centro' | 'Oeste' | 'Sul' | 'Norte' | 'Leste';
   tempoEntregaMin: number;
   valorBase: number;
 }
@@ -12,62 +12,99 @@ export interface BairroSP {
 // CONFIGURAÇÃO DE MARGEM
 // =====================
 
-// Valor fixo garantido por entrega (sua margem mínima)
+// Margem fixa garantida por entrega
 export const MARGEM_FIXA_ENTREGA = 15;
 
-// Percentual aplicado sobre o valor dos produtos
+// Percentual sobre o valor dos produtos
 export const MARGEM_PERCENTUAL_PRODUTOS = 0.03; // 3%
 
-// Teto máximo do percentual (protege o cliente)
+// Teto máximo do percentual (proteção UX)
 export const TETO_PERCENTUAL_ENTREGA = 10;
 
 // =====================
-// DADOS DOS BAIRROS (SP)
+// BAIRROS / REGIÕES ATENDIDAS
+// (valores base já dobrados)
 // =====================
 export const BAIRROS_SP: BairroSP[] = [
-  // ZONA CENTRO
-  { nome: "República", distanciaKm: 1.8, zona: "Centro", tempoEntregaMin: 8, valorBase: 25.00 },
-  { nome: "Sé", distanciaKm: 2.1, zona: "Centro", tempoEntregaMin: 10, valorBase: 25.60 },
-  { nome: "Santa Ifigênia", distanciaKm: 1.5, zona: "Centro", tempoEntregaMin: 7, valorBase: 24.20 },
-  { nome: "Luz", distanciaKm: 2.3, zona: "Centro", tempoEntregaMin: 11, valorBase: 25.80 },
-  { nome: "Bom Retiro", distanciaKm: 2.8, zona: "Centro", tempoEntregaMin: 13, valorBase: 27.00 },
+  // ========= CENTRO =========
+  { nome: "República", distanciaKm: 1.8, zona: "Centro", tempoEntregaMin: 8, valorBase: 25.0 },
+  { nome: "Sé", distanciaKm: 2.1, zona: "Centro", tempoEntregaMin: 10, valorBase: 25.6 },
+  { nome: "Luz", distanciaKm: 2.3, zona: "Centro", tempoEntregaMin: 11, valorBase: 26.0 },
+  { nome: "Santa Cecília", distanciaKm: 2.7, zona: "Centro", tempoEntregaMin: 12, valorBase: 27.2 },
+  { nome: "Brás", distanciaKm: 3.4, zona: "Centro", tempoEntregaMin: 15, valorBase: 28.8 },
+  { nome: "Belém", distanciaKm: 4.1, zona: "Centro", tempoEntregaMin: 18, valorBase: 30.2 },
+  { nome: "Consolação", distanciaKm: 2.6, zona: "Centro", tempoEntregaMin: 12, valorBase: 27.0 },
+  { nome: "Cerqueira César", distanciaKm: 3.1, zona: "Centro", tempoEntregaMin: 14, valorBase: 28.4 },
 
-  // ZONA OESTE
-  { nome: "Vila Madalena", distanciaKm: 4.2, zona: "Oeste", tempoEntregaMin: 15, valorBase: 29.40 },
-  { nome: "Pinheiros", distanciaKm: 4.8, zona: "Oeste", tempoEntregaMin: 18, valorBase: 30.60 },
-  { nome: "Jardins", distanciaKm: 3.5, zona: "Oeste", tempoEntregaMin: 12, valorBase: 28.40 },
-  { nome: "Itaim Bibi", distanciaKm: 5.2, zona: "Oeste", tempoEntregaMin: 20, valorBase: 32.80 },
-  { nome: "Vila Olímpia", distanciaKm: 5.5, zona: "Oeste", tempoEntregaMin: 22, valorBase: 34.00 },
-  { nome: "Brooklin", distanciaKm: 6.8, zona: "Oeste", tempoEntregaMin: 25, valorBase: 37.00 },
+  // ========= OESTE =========
+  { nome: "Pinheiros", distanciaKm: 4.8, zona: "Oeste", tempoEntregaMin: 18, valorBase: 30.6 },
+  { nome: "Faria Lima", distanciaKm: 4.6, zona: "Oeste", tempoEntregaMin: 17, valorBase: 30.2 },
+  { nome: "Jardins", distanciaKm: 3.5, zona: "Oeste", tempoEntregaMin: 14, valorBase: 28.4 },
+  { nome: "Vila Madalena", distanciaKm: 4.2, zona: "Oeste", tempoEntregaMin: 15, valorBase: 29.4 },
+  { nome: "Sumaré", distanciaKm: 4.9, zona: "Oeste", tempoEntregaMin: 18, valorBase: 30.8 },
+  { nome: "Palmeiras-Barra Funda", distanciaKm: 5.9, zona: "Oeste", tempoEntregaMin: 22, valorBase: 34.2 },
+  { nome: "Butantã", distanciaKm: 6.8, zona: "Oeste", tempoEntregaMin: 25, valorBase: 36.0 },
+  { nome: "Vila Sônia", distanciaKm: 9.2, zona: "Oeste", tempoEntregaMin: 35, valorBase: 41.0 },
+  { nome: "Vila Olímpia", distanciaKm: 5.5, zona: "Oeste", tempoEntregaMin: 22, valorBase: 34.0 },
 
-  // ZONA SUL
-  { nome: "Vila Mariana", distanciaKm: 6.2, zona: "Sul", tempoEntregaMin: 23, valorBase: 33.80 },
-  { nome: "Ipiranga", distanciaKm: 8.1, zona: "Sul", tempoEntregaMin: 30, valorBase: 37.80 },
-  { nome: "Santo Amaro", distanciaKm: 9.5, zona: "Sul", tempoEntregaMin: 35, valorBase: 41.00 },
-  { nome: "Saúde", distanciaKm: 7.3, zona: "Sul", tempoEntregaMin: 27, valorBase: 35.60 },
-  { nome: "Campo Belo", distanciaKm: 7.8, zona: "Sul", tempoEntregaMin: 29, valorBase: 36.40 },
-  { nome: "Jabaquara", distanciaKm: 10.2, zona: "Sul", tempoEntregaMin: 38, valorBase: 42.00 },
+  // ========= SUL =========
+  { nome: "Paraíso", distanciaKm: 4.1, zona: "Sul", tempoEntregaMin: 16, valorBase: 30.0 },
+  { nome: "Vila Mariana", distanciaKm: 6.2, zona: "Sul", tempoEntregaMin: 23, valorBase: 33.8 },
+  { nome: "Saúde", distanciaKm: 7.3, zona: "Sul", tempoEntregaMin: 27, valorBase: 35.6 },
+  { nome: "São Judas", distanciaKm: 7.8, zona: "Sul", tempoEntregaMin: 29, valorBase: 36.4 },
+  { nome: "Conceição", distanciaKm: 8.4, zona: "Sul", tempoEntregaMin: 31, valorBase: 37.8 },
+  { nome: "Jabaquara", distanciaKm: 10.2, zona: "Sul", tempoEntregaMin: 38, valorBase: 42.0 },
+  { nome: "Brooklin", distanciaKm: 6.8, zona: "Sul", tempoEntregaMin: 25, valorBase: 37.0 },
+  { nome: "Campo Belo", distanciaKm: 7.8, zona: "Sul", tempoEntregaMin: 29, valorBase: 36.4 },
+  { nome: "Morumbi", distanciaKm: 9.5, zona: "Sul", tempoEntregaMin: 35, valorBase: 41.0 },
+  { nome: "Santo Amaro", distanciaKm: 9.5, zona: "Sul", tempoEntregaMin: 35, valorBase: 41.0 },
+  { nome: "Capão Redondo", distanciaKm: 14.5, zona: "Sul", tempoEntregaMin: 55, valorBase: 52.0 },
+  { nome: "Campo Limpo", distanciaKm: 13.8, zona: "Sul", tempoEntregaMin: 52, valorBase: 50.0 },
+  { nome: "Grajaú", distanciaKm: 18.5, zona: "Sul", tempoEntregaMin: 65, valorBase: 60.0 },
+  { nome: "Varginha", distanciaKm: 20.2, zona: "Sul", tempoEntregaMin: 70, valorBase: 64.0 },
 
-  // ZONA NORTE
-  { nome: "Santana", distanciaKm: 6.3, zona: "Norte", tempoEntregaMin: 24, valorBase: 34.00 },
-  { nome: "Tucuruvi", distanciaKm: 7.1, zona: "Norte", tempoEntregaMin: 26, valorBase: 35.80 },
-  { nome: "Casa Verde", distanciaKm: 8.5, zona: "Norte", tempoEntregaMin: 32, valorBase: 38.40 },
-  { nome: "Vila Guilherme", distanciaKm: 7.9, zona: "Norte", tempoEntregaMin: 30, valorBase: 37.40 },
-  { nome: "Vila Maria", distanciaKm: 9.2, zona: "Norte", tempoEntregaMin: 34, valorBase: 39.60 },
+  // ========= NORTE =========
+  { nome: "Tucuruvi", distanciaKm: 7.1, zona: "Norte", tempoEntregaMin: 26, valorBase: 35.8 },
+  { nome: "Santana", distanciaKm: 6.3, zona: "Norte", tempoEntregaMin: 24, valorBase: 34.0 },
+  { nome: "Carandiru", distanciaKm: 5.4, zona: "Norte", tempoEntregaMin: 20, valorBase: 32.0 },
+  { nome: "Portuguesa-Tietê", distanciaKm: 6.0, zona: "Norte", tempoEntregaMin: 22, valorBase: 33.2 },
+  { nome: "Pirituba", distanciaKm: 12.5, zona: "Norte", tempoEntregaMin: 48, valorBase: 48.0 },
+  { nome: "Jaraguá", distanciaKm: 16.8, zona: "Norte", tempoEntregaMin: 60, valorBase: 56.0 },
 
-  // ZONA LESTE
-  { nome: "Tatuapé", distanciaKm: 8.7, zona: "Leste", tempoEntregaMin: 33, valorBase: 37.80 },
-  { nome: "Vila Prudente", distanciaKm: 9.2, zona: "Leste", tempoEntregaMin: 35, valorBase: 38.60 },
-  { nome: "Penha", distanciaKm: 10.8, zona: "Leste", tempoEntregaMin: 40, valorBase: 41.60 },
-  { nome: "Carrão", distanciaKm: 9.8, zona: "Leste", tempoEntregaMin: 37, valorBase: 39.40 },
-  { nome: "Vila Formosa", distanciaKm: 11.2, zona: "Leste", tempoEntregaMin: 42, valorBase: 42.40 },
+  // ========= LESTE =========
+  { nome: "Tatuapé", distanciaKm: 8.7, zona: "Leste", tempoEntregaMin: 33, valorBase: 37.8 },
+  { nome: "Vila Prudente", distanciaKm: 9.2, zona: "Leste", tempoEntregaMin: 35, valorBase: 38.6 },
+  { nome: "Oratório", distanciaKm: 9.8, zona: "Leste", tempoEntregaMin: 37, valorBase: 39.4 },
+  { nome: "São Lucas", distanciaKm: 10.4, zona: "Leste", tempoEntregaMin: 39, valorBase: 40.6 },
+  { nome: "Itaquera", distanciaKm: 15.2, zona: "Leste", tempoEntregaMin: 55, valorBase: 54.0 },
+  { nome: "Corinthians-Itaquera", distanciaKm: 15.5, zona: "Leste", tempoEntregaMin: 56, valorBase: 54.6 },
+  { nome: "Artur Alvim", distanciaKm: 13.4, zona: "Leste", tempoEntregaMin: 50, valorBase: 50.8 },
+  { nome: "Guaianases", distanciaKm: 18.9, zona: "Leste", tempoEntregaMin: 68, valorBase: 62.0 },
+  { nome: "São Miguel Paulista", distanciaKm: 16.5, zona: "Leste", tempoEntregaMin: 60, valorBase: 56.0 },
+
+  // ========= GRANDE SP =========
+  { nome: "Osasco", distanciaKm: 18.0, zona: "Oeste", tempoEntregaMin: 60, valorBase: 56.0 },
+  { nome: "Barueri", distanciaKm: 26.0, zona: "Oeste", tempoEntregaMin: 80, valorBase: 70.0 },
+  { nome: "Jandira", distanciaKm: 28.0, zona: "Oeste", tempoEntregaMin: 85, valorBase: 76.0 },
+  { nome: "Itapevi", distanciaKm: 35.0, zona: "Oeste", tempoEntregaMin: 100, valorBase: 88.0 },
+
+  { nome: "São Caetano do Sul", distanciaKm: 16.0, zona: "Sul", tempoEntregaMin: 55, valorBase: 54.0 },
+  { nome: "Santo André", distanciaKm: 18.0, zona: "Sul", tempoEntregaMin: 60, valorBase: 58.0 },
+  { nome: "Mauá", distanciaKm: 24.0, zona: "Sul", tempoEntregaMin: 75, valorBase: 68.0 },
+  { nome: "Ribeirão Pires", distanciaKm: 28.0, zona: "Sul", tempoEntregaMin: 85, valorBase: 74.0 },
+
+  { nome: "Ferraz de Vasconcelos", distanciaKm: 28.0, zona: "Leste", tempoEntregaMin: 85, valorBase: 74.0 },
+  { nome: "Poá", distanciaKm: 30.0, zona: "Leste", tempoEntregaMin: 90, valorBase: 78.0 },
+  { nome: "Itaquaquecetuba", distanciaKm: 32.0, zona: "Leste", tempoEntregaMin: 95, valorBase: 82.0 },
+  { nome: "Mogi das Cruzes", distanciaKm: 45.0, zona: "Leste", tempoEntregaMin: 130, valorBase: 110.0 },
+
+  { nome: "Aeroporto Internacional de Guarulhos", distanciaKm: 25.0, zona: "Norte", tempoEntregaMin: 80, valorBase: 70.0 },
 ];
 
+// =====================
+// UTILITÁRIOS
+// =====================
 export const ZONAS = ['Todas', 'Centro', 'Oeste', 'Sul', 'Norte', 'Leste'] as const;
-
-// =====================
-// FUNÇÕES UTILITÁRIAS
-// =====================
 
 export function getZonaColor(zona: string): string {
   const colors: Record<string, string> = {
@@ -87,15 +124,14 @@ export function buscarBairroPorNome(nome: string): BairroSP | undefined {
 }
 
 /**
- * Calcula o valor final da entrega (MODELO HÍBRIDO)
+ * Cálculo final da entrega (MODELO HÍBRIDO)
  */
 export function calcularValorEntrega(
   bairro: BairroSP,
   valorProdutos: number
 ): number {
-  const percentualCalculado = valorProdutos * MARGEM_PERCENTUAL_PRODUTOS;
-  const percentualFinal = Math.min(
-    percentualCalculado,
+  const percentual = Math.min(
+    valorProdutos * MARGEM_PERCENTUAL_PRODUTOS,
     TETO_PERCENTUAL_ENTREGA
   );
 
@@ -103,7 +139,7 @@ export function calcularValorEntrega(
     (
       bairro.valorBase +
       MARGEM_FIXA_ENTREGA +
-      percentualFinal
+      percentual
     ).toFixed(2)
   );
 }
