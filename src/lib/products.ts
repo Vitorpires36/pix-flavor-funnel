@@ -31,7 +31,7 @@ export const products: Product[] = [
   id: "ignite-v150-15k",
   name: "IGNITE V150 15K",
   description: "15.000 PUFFS - Potência e longa duração",
-  price: 109.90,
+  price: 94.90,
   image: "/IGNITEV150.png",
   category: "pod",
   brand: "Ignite",
@@ -55,7 +55,7 @@ export const products: Product[] = [
   id: "ignite-v400-40k",
   name: "IGNITE V400 40K",
   description: "40.000 PUFFS - Ultra bateria + fluxo ajustável",
-  price: 124.90,
+  price: 129.90,
   image: "/IGNITEV400.png",
   category: "pod",
   brand: "Ignite",
@@ -167,7 +167,7 @@ export const products: Product[] = [
   id: "elfbar-400000",
   name: "ELFBAR 40K ICE KING",
   description: "40.000 PUFFS - Display LED",
-  price: 114.90,
+  price: 119.90,
   image: "/ELFBAR40K.png",
   category: "pod",
   brand: "Elf Bar",
@@ -250,7 +250,7 @@ export const products: Product[] = [
   id: "lostmary-30000",
   name: "LOST MARY 30K",
   description: "30.000 PUFFS",
-  price: 79.90,
+  price: 84.90,
   image: "/LOSTMARY30K.png",
   category: "pod",
   brand: "Lost Mary",
@@ -347,19 +347,6 @@ export const products: Product[] = [
   ]
 },
 
-  // FUNKYLANDS
-  {
-    id: "funkylands-7000",
-    name: "FUNKYLANDS 7K",
-    description: "7.000 PUFFS",
-    price: 54.90,
-    image: "/FUNKYLAND7K.png",
-    category: "pod",
-    brand: "Funkylands",
-    puffs: "7000",
-    inStock: true,
-    flavors: ["Rainbow Candy", "Cool Mint", "Strawberry Ice"]
-  },
    // NIKBAR
   {
     id: "nikbar-40k",
