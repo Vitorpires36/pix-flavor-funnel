@@ -10,27 +10,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-  Copy,
-  Check,
-  MessageCircle,
-  MapPin,
-  Clock,
-  Search,
-  Truck,
-  Star,
-  Zap,
+  Copy, Check, MessageCircle, MapPin, Clock, Search, Truck, Star, Zap
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
-
 import {
   BAIRROS_SP,
   ZONAS,
   getZonaColor,
-  type BairroSP,
-  calcularFrete,
+  calcularFreteDinamico,
   freteFullSpDisponivel,
   FRETE_FULL_SP_VALOR,
+  type BairroSP
 } from '@/lib/bairros';
 
 interface CheckoutDialogProps {
@@ -48,63 +39,55 @@ export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedZona, setSelectedZona] = useState('Todos');
   const [step, setStep] = useState<'form' | 'pix'>('form');
-  const [tipoFrete, setTipoFrete] = useState<'FULL_SP' | 'DINAMICO'>('DINAMICO');
 
   const pixKey = '5511948453681';
-  const freteGratis = total >= 300;
+  const fullSpDisponivel = freteFullSpDisponivel();
 
   useEffect(() => {
-    if (freteFullSpDisponivel()) {
-      setTipoFrete('FULL_SP');
-    } else {
-      setTipoFrete('DINAMICO');
+    if (open) {
+      setName('');
+      setPhone('');
+      setEndereco('');
+      setSelectedBairro(null);
+      setSearchTerm('');
+      setSelectedZona('Todos');
+      setStep('form');
     }
-  }, []);
+  }, [open]);
 
   const bairrosFiltrados = useMemo(() => {
     return BAIRROS_SP.filter(b =>
       b.nome.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedZona === 'Todos' || b.zona === selectedZona)
-    ).sort((a, b) => a.distanciaKm - b.distanciaKm);
+    );
   }, [searchTerm, selectedZona]);
 
-  const valorFrete = useMemo(() => {
-    if (freteGratis) return 0;
+  const valorFrete = selectedBairro
+    ? calcularFreteDinamico(selectedBairro, total)
+    : 0;
 
-    try {
-      return calcularFrete(tipoFrete, {
-        bairro: selectedBairro ?? undefined,
-        valorProdutos: total,
-      });
-    } catch {
-      return 0;
-    }
-  }, [tipoFrete, selectedBairro, total, freteGratis]);
+  const valorFreteFinal = fullSpDisponivel
+    ? Math.min(valorFrete, FRETE_FULL_SP_VALOR)
+    : valorFrete;
 
-  const totalComFrete = total + valorFrete;
+  const totalComFrete = total + valorFreteFinal;
 
   const handleGeneratePix = () => {
     if (!name || !phone || !endereco || !selectedBairro) {
-      toast.error('Preencha todos os dados');
+      toast.error('Preencha todos os campos');
       return;
     }
     setStep('pix');
   };
 
   const handleSendWhatsApp = () => {
-    const freteTexto = freteGratis
-      ? 'GRÁTIS'
-      : tipoFrete === 'FULL_SP'
-      ? `FULL SP — R$ ${FRETE_FULL_SP_VALOR.toFixed(2)}`
-      : `R$ ${valorFrete.toFixed(2)}`;
-
     const message =
       `🛍️ *Novo Pedido*\n\n` +
-      `👤 ${name}\n📱 ${phone}\n📍 ${endereco}\n` +
-      `🏘️ ${selectedBairro?.nome} (${selectedBairro?.zona})\n` +
-      `🚚 Frete: ${freteTexto}\n` +
-      `💰 Total: R$ ${totalComFrete.toFixed(2)}\n\n` +
-      `Pagamento via PIX confirmado`;
+      `👤 ${name}\n📱 ${phone}\n📍 ${endereco}\n🏘️ ${selectedBairro?.nome}\n\n` +
+      cart.map(i =>
+        `• ${i.quantity}x ${i.name} - R$ ${(i.price * i.quantity).toFixed(2)}`
+      ).join('\n') +
+      `\n\n🚚 Frete: R$ ${valorFreteFinal.toFixed(2)}\n💰 Total: R$ ${totalComFrete.toFixed(2)}`;
 
     window.open(
       `https://wa.me/5511981878093?text=${encodeURIComponent(message)}`,
@@ -119,23 +102,55 @@ export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Truck className="h-5 w-5" /> Finalizar Pedido
+          <DialogTitle>
+            {step === 'form' ? 'Finalizar Pedido' : 'Pagamento PIX'}
           </DialogTitle>
         </DialogHeader>
 
-        {tipoFrete === 'FULL_SP' && (
-          <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg flex items-center gap-2">
-            <Zap className="h-4 w-4 text-blue-500" />
-            <span className="text-sm font-semibold text-blue-600">
-              Frete FULL SP — Entrega hoje por R$ 15,00
-            </span>
+        {step === 'form' ? (
+          <div className="space-y-4">
+            <Input placeholder="Nome" value={name} onChange={e => setName(e.target.value)} />
+            <Input placeholder="Telefone" value={phone} onChange={e => setPhone(e.target.value)} />
+            <Input placeholder="Endereço" value={endereco} onChange={e => setEndereco(e.target.value)} />
+
+            <Input
+              placeholder="Buscar bairro"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+            />
+
+            {bairrosFiltrados.map(bairro => (
+              <Button
+                key={bairro.nome}
+                variant={selectedBairro?.nome === bairro.nome ? 'default' : 'outline'}
+                onClick={() => setSelectedBairro(bairro)}
+                className="w-full justify-between"
+              >
+                {bairro.nome}
+                <span>R$ {calcularFreteDinamico(bairro, total).toFixed(2)}</span>
+              </Button>
+            ))}
+
+            {fullSpDisponivel && (
+              <div className="bg-green-100 p-3 rounded text-sm text-green-700">
+                🚀 Frete Full SP disponível por R$ 15,00 (entrega hoje)
+              </div>
+            )}
+
+            <Button onClick={handleGeneratePix} className="w-full">
+              Continuar para PIX
+            </Button>
+          </div>
+        ) : (
+          <div className="space-y-4 text-center">
+            <p>Chave PIX</p>
+            <Input readOnly value={pixKey} />
+            <p className="font-bold">Total: R$ {totalComFrete.toFixed(2)}</p>
+            <Button onClick={handleSendWhatsApp} className="w-full">
+              Confirmar no WhatsApp
+            </Button>
           </div>
         )}
-
-        <Button onClick={handleGeneratePix} className="w-full">
-          Continuar para PIX
-        </Button>
       </DialogContent>
     </Dialog>
   );
