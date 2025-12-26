@@ -404,5 +404,14 @@ export const products: Product[] = [
     inStock: true,
     flavors: ["Mint", "Strawberry", "Grape"]
   },
+    {
+    id: "cabotpc",
+    name: "CABO TIPO C",
+    description: "CABO USB-C",
+    price: 15.90,
+    image: "/NIKBAR40K.png",
+    inStock: true,
+    flavors: ["branco"]
+  },
   ]
  
