@@ -76,19 +76,7 @@ export const products: Product[] = [
     inStock: true,
     flavors: ["Morango Kiwi", "Mirtilo", "Manga", "Maracujá", "Framboesa"]
   },
-  
-  {
-    id: "elfbar-tc10000",
-    name: "ELFBAR TOUCH",
-    description: "10.000 PUFFS",
-    price: 74.90,
-    image: "/ELFBARTOUCH10K.png",
-    category: "pod",
-    brand: "Elf Bar",
-    puffs: "10000",
-    inStock: true,
-    flavors: ["Blue Razz Ice", "Strawberry Ice", "Mango Ice"]
-  },
+
   
   {
     id: "elfbar-ew-kit-16k",
