@@ -67,7 +67,7 @@ export const products: Product[] = [
   id: "ignite-v400-40k",
   name: "IGNITE V400 MIX",
   description: "40.000 PUFFS",
-  price: 124.90,
+  price: 139.90,
   image: "/IGNITEV400MIX.png",
   category: "pod",
   brand: "Ignite",
@@ -205,6 +205,35 @@ export const products: Product[] = [
     "Tiger’s Blood",
     "Watermelon Ice"
   ]
+},
+  {
+  id: "elfbar-400000",
+  name: "ELFBAR TRIO 40K ",
+  description: "40.000 PUFFS",
+  price: 124.90,
+  image: "/ELFBARTRIO40K.png",
+  category: "pod",
+  brand: "Elf Bar",
+  puffs: "40000",
+  inStock: true,
+ flavors: [
+  "Black Mint",
+  "Blue Razz Ice",
+  "Blueberry Pom Slushy",
+  "Cool Menthol",
+  "La Grape",
+  "Orange Blast",
+  "Peach Twist",
+  "Pineapple Lime",
+  "Pomegranate Blast",
+  "Raspberry Watermelon",
+  "Sakura Grape",
+  "Scary Berry",
+  "Sour Apple Ice",
+  "Sour Strawberry Dragon Fruit",
+  "Strawberry Orange Lime",
+  "Watermelon Ice"
+]
 },
 {
     id: "elfbar-bateria",
