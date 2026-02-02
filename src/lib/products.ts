@@ -5,15 +5,15 @@ export const products: Product[] = [
   // ---------------- IGNITE ----------------
 {
   id: "ignite-v50-5k",
-  name: "IGNITE V50 5K",
+  name: "IGNITE V55 SLIM",
   description: "5.000 PUFFS - Compacto e potente",
-  price: 49.90,
-  image: "/IGNITEV50.png",
+  price: 74.90,
+  image: "/IGNITEV55.png",
   category: "pod",
   brand: "Ignite",
   puffs: "5000",
   inStock: true,
-  flavors: ["Blue Rasberry Ice", "Strawberry Banana", "Blue Dream", "Strawberry Watermelon", "Strawberry Mango", "Watermelon Ice", "Peach Mango Watermelon"]
+  flavors: ["Grape Ice", "Pineapple Ice", "Vanilla Cream", "Strawberry Watermelon", "Icy Mint", "Açaí Watermelon Ice", "Menthol", "Mint Melon", "Banana Ice", "Green Apple", "Blueberry Ice"]
 },
 {
   id: "ignite-v80-8k",
@@ -31,7 +31,7 @@ export const products: Product[] = [
   id: "ignite-v150-15k",
   name: "IGNITE V150 15K",
   description: "15.000 PUFFS - Potência e longa duração",
-  price: 94.90,
+  price: 99.90,
   image: "/IGNITEV150.png",
   category: "pod",
   brand: "Ignite",
