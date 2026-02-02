@@ -48,6 +48,7 @@ export const BAIRROS_SP: BairroSP[] = [
 
   // ========= SUL =========
   { nome: "Paraíso", distanciaKm: 4.1, zona: "Sul", tempoEntregaMin: 16, valorBase: 30.0 },
+  { nome: "Ipiranga", distanciaKm: 8.1, zona: "Sul", tempoEntregaMin: 30, valorBase: 36.8 },
   { nome: "Vila Mariana", distanciaKm: 6.2, zona: "Sul", tempoEntregaMin: 23, valorBase: 33.8 },
   { nome: "Saúde", distanciaKm: 7.3, zona: "Sul", tempoEntregaMin: 27, valorBase: 35.6 },
   { nome: "São Judas", distanciaKm: 7.8, zona: "Sul", tempoEntregaMin: 29, valorBase: 36.4 },
