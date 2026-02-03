@@ -56,6 +56,11 @@ export const ProductCard = ({ product, isTabacaria = false }: ProductCardProps) 
               {product.puffs} Puffs
             </Badge>
           )}
+          {!product.inStock && (
+            <Badge className="absolute top-2 left-2 bg-red-600 text-white hover:bg-red-700 font-bold z-10">
+              ESGOTADO
+            </Badge>
+          )}
         </div>
         <div className="p-3">
           <h3 className={`font-bold text-sm mb-1 truncate ${isTabacaria ? 'text-accent' : 'text-primary'}`}>
@@ -70,7 +75,16 @@ export const ProductCard = ({ product, isTabacaria = false }: ProductCardProps) 
         </div>
       </CardContent>
       <CardFooter className="p-3 pt-0">
-        {product.flavors && product.flavors.length > 0 ? (
+        {!product.inStock ? (
+          <Button
+            className="w-full cursor-not-allowed opacity-80"
+            variant="secondary"
+            size="sm"
+            disabled
+          >
+            Indisponível
+          </Button>
+        ) : product.flavors && product.flavors.length > 0 ? (
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <Button

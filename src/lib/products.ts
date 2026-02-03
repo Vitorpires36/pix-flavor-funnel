@@ -12,7 +12,7 @@ export const products: Product[] = [
   category: "pod",
   brand: "Ignite",
   puffs: "5000",
-  inStock: true,
+  inStock: false,
   flavors: ["Grape Ice", "Pineapple Ice", "Vanilla Cream", "Strawberry Watermelon", "Icy Mint", "Açaí Watermelon Ice", "Menthol", "Mint Melon", "Banana Ice", "Green Apple", "Blueberry Ice"]
 },
 {
@@ -445,3 +445,4 @@ export const products: Product[] = [
   },
   ]
  
+// test permission

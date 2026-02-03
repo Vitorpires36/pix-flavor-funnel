@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 import express from 'express';
 
 const app = express();
@@ -89,6 +91,50 @@ app.get('/health', (req, res) => {
     versao: '1.0.0'
   });
 });
+
+
+// =====================
+// ADMIN API ROUTES
+// =====================
+
+const DATA_DIR = path.join(__dirname, 'data');
+
+app.get('/api/products', (req, res) => {
+  try {
+    const data = fs.readFileSync(path.join(DATA_DIR, 'products.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/api/products', (req, res) => {
+  try {
+    fs.writeFileSync(path.join(DATA_DIR, 'products.json'), JSON.stringify(req.body, null, 2));
+    res.json({ success: true });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.get('/api/bairros', (req, res) => {
+  try {
+    const data = fs.readFileSync(path.join(DATA_DIR, 'bairros.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/api/bairros', (req, res) => {
+  try {
+    fs.writeFileSync(path.join(DATA_DIR, 'bairros.json'), JSON.stringify(req.body, null, 2));
+    res.json({ success: true });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 
 app.use((req, res) => {
   res.status(404).json({

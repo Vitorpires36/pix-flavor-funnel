@@ -5,8 +5,8 @@ import { toast } from 'sonner';
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product, flavor?: string) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: string, flavor?: string) => void;
+  updateQuantity: (productId: string, quantity: number, flavor?: string) => void;
   clearCart: () => void;
   total: number;
   itemCount: number;
@@ -37,20 +37,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFromCart = (productId: string) => {
-    setCart(prev => prev.filter(item => item.id !== productId));
+  const removeFromCart = (productId: string, flavor?: string) => {
+    setCart(prev => prev.filter(item => 
+      !(item.id === productId && item.selectedFlavor === flavor)
+    ));
     toast.info('Produto removido do carrinho');
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: string, quantity: number, flavor?: string) => {
     if (quantity === 0) {
-      removeFromCart(productId);
+      removeFromCart(productId, flavor);
       return;
     }
 
     setCart(prev =>
       prev.map(item =>
-        item.id === productId ? { ...item, quantity } : item
+        (item.id === productId && item.selectedFlavor === flavor)
+          ? { ...item, quantity }
+          : item
       )
     );
   };

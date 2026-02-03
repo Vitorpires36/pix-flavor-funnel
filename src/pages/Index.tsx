@@ -1,15 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { ProductCard } from '@/components/ProductCard';
 import { Chatbot } from '@/components/Chatbot';
-import { products } from '@/lib/products';
+import { products as initialProducts } from '@/lib/products';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Product } from '@/types/product';
 
 const Index = () => {
+  // Estado inicial usa a lista fixa, mas será substituído pelos dados do servidor
+  const [productsData, setProductsData] = useState<Product[]>(initialProducts);
   const [selectedBrand, setSelectedBrand] = useState<string>('all');
 
-  const podProducts = products.filter(p => p.category === 'pod');
-  const tabacariaProducts = products.filter(p => p.category === 'tabacaria');
+  // Busca os dados atualizados do Painel Admin (remove duplicatas e atualiza estoque)
+  useEffect(() => {
+    // Tenta buscar na porta 4001 (Admin Server)
+    fetch('http://localhost:4001/api/products')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          console.log('✅ Produtos sincronizados com o Admin (Porta 4001)!');
+          setProductsData(data);
+        }
+      })
+      .catch(err => {
+        console.error('❌ Erro ao buscar produtos na porta 4001:', err);
+        // Fallback para tentar 4000 caso o usuário esteja usando essa porta
+        fetch('http://localhost:4000/api/products')
+          .then(res => res.json())
+          .then(data => {
+             if (Array.isArray(data) && data.length > 0) {
+               console.log('✅ Produtos sincronizados com o Server Local (Porta 4000)!');
+               setProductsData(data);
+             }
+          })
+          .catch(err2 => console.error('❌ Erro ao buscar produtos na porta 4000 também:', err2));
+      });
+  }, []);
+
+  const podProducts = productsData.filter(p => p.category === 'pod');
   
   const brands = ['Ignite', 'Elf Bar', 'Lost Mary', 'Oxbar', 'Sex Addict', 'Adjust', 'Nikbar'];
   
@@ -44,7 +72,7 @@ const Index = () => {
         <h2 className="text-2xl font-bold text-primary mb-6">Pods</h2>
         
         <Tabs defaultValue="all" className="w-full mb-8">
-          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10 mb-6 bg-card">
+          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10 h-auto mb-6 bg-card">
             <TabsTrigger 
               value="all" 
               onClick={() => setSelectedBrand('all')}
@@ -83,15 +111,9 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-black text-white text-center py-6 mt-12 border-t-2 border-primary">
         <p className="text-sm">
-          © 2025 PODE POD - Todos os direitos reservados
-        </p>
-        <p className="text-xs text-muted-foreground mt-2">
-          Venda proibida para menores de 18 anos
+          © 2026 PodePod. Todos os direitos reservados.
         </p>
       </footer>
-
-      {/* Chatbot */}
-      <Chatbot />
     </div>
   );
 };
