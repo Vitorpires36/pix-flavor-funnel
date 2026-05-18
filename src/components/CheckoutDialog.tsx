@@ -44,7 +44,7 @@ export const CheckoutDialog = ({ open, onOpenChange }: CheckoutDialogProps) => {
   const [copied, setCopied] = useState(false);
   const [step, setStep] = useState<'form' | 'pix'>('form');
 
-  const pixKey = '11948453681';
+  const pixKey = '11992792649';
 
   // Reset ao abrir
   useEffect(() => {
